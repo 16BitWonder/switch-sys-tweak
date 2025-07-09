@@ -18,18 +18,12 @@
 
 #include "libams.hpp"
 
-#ifdef HAVE_NSVM_SAFE
-#include "nsvm_mitm_service.hpp"
-#endif
 
 #if defined(HAVE_NSAM_CONTROL) || defined(HAVE_NSRO_CONTROL)
 #include "ns_srvget_mitm_service.hpp"
 #endif
 
 enum {
-#ifdef HAVE_NSVM_SAFE
-	MitmManagerPort_NsVm,
-#endif
 #ifdef HAVE_NSAM_CONTROL
 	MitmManagerPort_NsAm2,
 #endif
@@ -40,9 +34,6 @@ enum {
 };
 
 static constexpr size_t MitmManagerMaxSessions = 1
-#ifdef HAVE_NSVM_SAFE
-	+ NsVmMitmService::GetMaxSessions()
-#endif
 #ifdef HAVE_NSAM_CONTROL
 	+ NsAm2MitmService::GetMaxSessions()
 #endif
